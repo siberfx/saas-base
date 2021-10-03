@@ -62,7 +62,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware(['web', 'check.master.domain'])
              ->namespace($this->namespace)
-            ->domain(env('app_domain'))
+            ->domain(config('tenant.master_domain'))
             ->group(base_path('routes/web.php'));
     }
 
@@ -91,7 +91,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapTenantRoutes()
     {
         Route::middleware(['tenant', 'web'])
-            ->domain('{subdomain}.'.env('app_domain'))
+            ->domain('{subdomain}.'.config('tenant.master_domain'))
             ->namespace($this->namespace)
             ->group(base_path('routes/tenant.php'));
 
